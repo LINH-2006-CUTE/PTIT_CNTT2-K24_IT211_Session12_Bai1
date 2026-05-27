@@ -14,7 +14,7 @@ import java.util.Arrays;
 public class LoggingAspect {
     @Before("execution(* com.example.session12_it211_bai1.controller.*.*(..))")
     public void logBeforeController(JoinPoint joinPoint) {
-        log.info("controller - Method: {} | Tham số: {}",
+        log.info("controllergit push origin main - Method: {} | Tham số: {}",
                 joinPoint.getSignature().getName(),
                 Arrays.toString(joinPoint.getArgs()));
     }
