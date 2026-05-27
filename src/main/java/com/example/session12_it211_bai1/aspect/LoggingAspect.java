@@ -1,38 +1,40 @@
 package com.example.session12_it211_bai1.aspect;
 
+import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 
+@Slf4j
 @Aspect
 @Component
 public class LoggingAspect {
-    private static final Logger logger = LoggerFactory.getLogger(LoggingAspect.class);
-
-    // @Before
-    @Before("execution(* com.example.session12_it211_bai1.controller.BookController.*(..))")
-    public void logBefore(JoinPoint joinPoint) {
-        logger.info("Calling method: {} with args: {}", joinPoint.getSignature().getName(), Arrays.toString(joinPoint.getArgs()));
+    @Before("execution(* com.example.session12_it211_bai1.controller.*.*(..))")
+    public void logBeforeController(JoinPoint joinPoint) {
+        log.info("controller - Method: {} | Tham số: {}",
+                joinPoint.getSignature().getName(),
+                Arrays.toString(joinPoint.getArgs()));
     }
 
-    //  @AfterReturning
     @AfterReturning(pointcut = "execution(* com.example.session12_it211_bai1.service.BookService.*(..))", returning = "result")
-    public void logAfterReturning(JoinPoint joinPoint, Object result) {
-        logger.info("Method {} returned: {}", joinPoint.getSignature().getName(), result);
+    public void logAfterService(JoinPoint joinPoint, Object result) {
+        log.info("service - Method: {} | Kết quả trả về: {}",
+                joinPoint.getSignature().getName(),
+                result);
     }
 
-    //  @Around
-    @Around("execution(* com.example.session12_it211_bai1.controller.BookController.*(..))")
-    public Object logExecutionTime(ProceedingJoinPoint joinPoint) throws Throwable {
+    @Around("execution(* com.example.session12_it211_bai1.controller.*.*(..))")
+    public Object logAroundController(ProceedingJoinPoint joinPoint) throws Throwable {
         long start = System.currentTimeMillis();
-        Object proceed = joinPoint.proceed();
+        Object proceed = joinPoint.proceed(); // Chạy method chính
         long executionTime = System.currentTimeMillis() - start;
-        logger.info("Method {} executed in {} ms", joinPoint.getSignature().getName(), executionTime);
+
+        log.info("Controller - Method: {} thực thi trong {} ms",
+                joinPoint.getSignature().getName(),
+                executionTime);
         return proceed;
     }
 }

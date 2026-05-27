@@ -1,6 +1,7 @@
 package com.example.session12_it211_bai1.service;
 
 import com.example.session12_it211_bai1.model.entity.Book;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

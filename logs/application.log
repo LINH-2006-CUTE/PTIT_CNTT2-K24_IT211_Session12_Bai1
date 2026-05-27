@@ -1,0 +1,27 @@
+2026-05-27T21:01:19.935+07:00 ERROR 3016 --- [Session12_IT211_Bai1] [restartedMain] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Failed to bind properties under 'logging.level.com.example.session12it211bai1' to org.springframework.boot.logging.LogLevel:
+
+    Property: logging.level.com.example.session12it211bai1
+    Value: "INFOspring.jpa.properties.hibernate.format_sql=true"
+    Origin: class path resource [application.properties] - 14:48
+    Reason: failed to convert java.lang.String to org.springframework.boot.logging.LogLevel (caused by java.lang.IllegalArgumentException: No enum constant org.springframework.boot.logging.LogLevel.INFOspring.jpa.properties.hibernate.format_sql=true)
+
+Action:
+
+Update your application's configuration. The following values are valid:
+
+    DEBUG
+    ERROR
+    FATAL
+    INFO
+    OFF
+    TRACE
+    WARN
+
